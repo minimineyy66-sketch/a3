@@ -55,7 +55,20 @@
             </div>
             <div class="hero-image-wrapper reveal-item">
                 <div class="hero-image-container">
-                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800" alt="Clean organized kitchen workspace" loading="lazy">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%" style="background:#FFFBEB; display:block;">
+       <defs>
+         <linearGradient id="grad-hero" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" stop-color="#9A3412" />
+           <stop offset="100%" stop-color="#C2410C" />
+         </linearGradient>
+       </defs>
+       <rect x="10" y="10" width="780" height="580" fill="url(#grad-hero)" stroke="#0F172A" stroke-width="8" />
+       <path d="M 300 350 L 500 350 A 100 100 0 0 1 300 350 Z" fill="#0F172A" stroke="#FFFBEB" stroke-width="4" />
+       <path d="M 500 350 L 620 280" stroke="#0F172A" stroke-width="12" stroke-linecap="round" />
+       <path d="M 380 200 L 420 200 L 420 300 L 380 300 Z" fill="#059669" stroke="#0F172A" stroke-width="6" />
+       <circle cx="400" cy="180" r="40" fill="#059669" stroke="#0F172A" stroke-width="6" />
+       <text x="400" y="480" font-family="'Playfair Display SC', serif" font-size="36" font-weight="bold" fill="#FFFBEB" text-anchor="middle" letter-spacing="2">HAPPY KITCHEN GUIDE</text>
+     </svg>
                 </div>
             </div>
         </section>
@@ -72,7 +85,20 @@
                 <div class="luxury-card reveal-item">
                     <div class="feature-img-wrapper">
                         <span class="feature-badge">Tools</span>
-                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=600" alt="Professional chef knife collection" loading="lazy">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" style="background:#FFFBEB; display:block;">
+       <defs>
+         <linearGradient id="grad-knife" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" stop-color="#059669" />
+           <stop offset="100%" stop-color="#10B981" />
+         </linearGradient>
+       </defs>
+       <rect x="5" y="5" width="590" height="440" fill="url(#grad-knife)" stroke="#0F172A" stroke-width="6" />
+       <path d="M 150 200 L 400 200 Q 480 200 460 250 L 150 250 Z" fill="#E2E8F0" stroke="#0F172A" stroke-width="6" />
+       <rect x="80" y="210" width="70" height="30" rx="5" fill="#9A3412" stroke="#0F172A" stroke-width="6" />
+       <circle cx="100" cy="225" r="3" fill="#FFFFFF" />
+       <circle cx="130" cy="225" r="3" fill="#FFFFFF" />
+       <text x="300" y="360" font-family="'Playfair Display SC', serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">KNIFE PREP</text>
+     </svg>
                     </div>
                     <div class="feature-content">
                         <h3>Knife Prep</h3>
@@ -84,7 +110,20 @@
                 <div class="luxury-card reveal-item">
                     <div class="feature-img-wrapper">
                         <span class="feature-badge">Storage</span>
-                        <img src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&q=80&w=600" alt="Clean modular pantry shelves" loading="lazy">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" style="background:#FFFBEB; display:block;">
+       <defs>
+         <linearGradient id="grad-pantry" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" stop-color="#C2410C" />
+           <stop offset="100%" stop-color="#ea580c" />
+         </linearGradient>
+       </defs>
+       <rect x="5" y="5" width="590" height="440" fill="url(#grad-pantry)" stroke="#0F172A" stroke-width="6" />
+       <rect x="220" y="120" width="160" height="220" rx="20" fill="#FFFFFF" stroke="#0F172A" stroke-width="6" />
+       <rect x="250" y="90" width="100" height="30" rx="5" fill="#B45309" stroke="#0F172A" stroke-width="6" />
+       <rect x="240" y="190" width="120" height="60" fill="#FCD34D" stroke="#0F172A" stroke-width="4" />
+       <text x="300" y="225" font-family="'Karla', sans-serif" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">RICE</text>
+       <text x="300" y="390" font-family="'Playfair Display SC', serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">PANTRY STORAGE</text>
+     </svg>
                     </div>
                     <div class="feature-content">
                         <h3>Pantry Storage</h3>
@@ -96,7 +135,21 @@
                 <div class="luxury-card reveal-item">
                     <div class="feature-img-wrapper">
                         <span class="feature-badge">Cookware</span>
-                        <img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&q=80&w=600" alt="Preseasoned cast iron skillet pan" loading="lazy">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" style="background:#FFFBEB; display:block;">
+       <defs>
+         <linearGradient id="grad-castiron" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" stop-color="#1E293B" />
+           <stop offset="100%" stop-color="#0F172A" />
+         </linearGradient>
+       </defs>
+       <rect x="5" y="5" width="590" height="440" fill="url(#grad-castiron)" stroke="#0F172A" stroke-width="6" />
+       <circle cx="260" cy="220" r="100" fill="#0F172A" stroke="#FFFFFF" stroke-width="6" />
+       <path d="M 360 220 L 480 220" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" />
+       <path d="M 260 115 L 260 125" stroke="#FFFFFF" stroke-width="12" />
+       <polygon points="120,180 130,195 110,195" fill="#F59E0B" />
+       <polygon points="400,120 410,135 390,135" fill="#EF4444" />
+       <text x="300" y="380" font-family="'Playfair Display SC', serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">CAST IRON PAN</text>
+     </svg>
                     </div>
                     <div class="feature-content">
                         <h3>Cast Iron Cookware</h3>
